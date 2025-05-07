@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .contact-form {
+      max-width: 400px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .contact-form h2 {
+      text-align: center;
+    }
+    .form-control {
+      margin-bottom: 15px;
+    }
+    .form-control label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-control input,
+    .form-control textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .contact-form button {
+      width: 100%;
+      padding: 10px;
+      background: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .contact-form button:hover {
+      background: #45a049;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-form">
+    <h2>Contact Us</h2>
+    <form id="form">
+      <div class="form-control">
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <span id="nameError" class="error"></span>
+      </div>
+      <div class="form-control">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <span id="emailError" class="error"></span>
+      </div>
+      <div class="form-control">
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" required></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Form Validation
+    const form = document.getElementById('form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      nameError.textContent = '';
+      emailError.textContent = '';
+
+      if (nameInput.value.trim() === '') {
+        nameError.textContent = 'Name is required';
+        valid = false;
+      }
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!emailPattern.test(emailInput.value)) {
+        emailError.textContent = 'Enter a valid email';
+        valid = false;
+      }
+
+      if (valid) {
+        alert('Form submitted successfully!');
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
